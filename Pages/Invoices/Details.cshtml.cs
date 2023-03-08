@@ -28,18 +28,20 @@ namespace IMS.Pages.Invoices
         // displays the details' page...
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || Context.Invoice == null)
-            {
+            if (id == null)
                 return NotFound();
-            }
 
             var invoice = await Context.Invoice.FirstOrDefaultAsync(m => m.InvoiceId == id);
+            
             if (invoice == null)
                 return NotFound();
 
-            var isAuthorized = await AuthorizationService.AuthorizeAsync(User, Invoice, InvoiceOperations.Read);
+            var isInvoiceCreator = await AuthorizationService.AuthorizeAsync(User, Invoice, InvoiceOperations.Read);
 
-            if (!isAuthorized.Succeeded)
+            var isManager = User.IsInRole(Constants.InvoiceManagerRole);
+
+            // if the current user isn't the creator of the invoice (accountant) and also not a manager
+            if (!isInvoiceCreator.Succeeded && !isManager)
                 return Forbid();
 
             return Page();

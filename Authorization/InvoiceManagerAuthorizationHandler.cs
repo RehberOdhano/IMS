@@ -1,7 +1,6 @@
 ﻿using IMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 
 namespace IMS.Authorization
 {

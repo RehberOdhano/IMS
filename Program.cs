@@ -41,10 +41,21 @@ builder.Services.AddAuthorization(options =>
 
 });
 
+// here we're using addscoped, because in our InvoiceCreatorAuthorizationHandler, we're making use of
+// the entity framework...
 builder.Services.AddScoped<IAuthorizationHandler, InvoiceCreatorAuthorizationHandler>();
+
+// singleton - only one instance of this class...
+builder.Services.AddSingleton<IAuthorizationHandler, InvoiceManagerAuthorizationHandler>();
 
 
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedData.Initialize(services, "te$T30");
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
