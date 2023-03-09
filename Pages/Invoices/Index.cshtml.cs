@@ -30,20 +30,19 @@ namespace IMS.Pages.Invoices
             // checking if the current user is the manager...
             var isManager = User.IsInRole(Constants.InvoiceManagerRole);
 
+            // checking if the current user is the admin..
+            var isAdmin = User.IsInRole(Constants.InvoiceAdminRole);
+
             var currentUserId = UserManager.GetUserId(User);
 
             // if the current user isn't a manager, its an accountant, then grab all those
             // invoices that are specific to that accountant...
-            if (!isManager)
+            if (!isManager && !isAdmin)
             {
                 invoices = invoices.Where(invoice => invoice.InvoiceCreatorId == currentUserId);
             }
-            else
-            {
-                Invoice = await invoices.ToListAsync();
-            }
 
-
+            Invoice = await invoices.ToListAsync();
         }
     }
 }

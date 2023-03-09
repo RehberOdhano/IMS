@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "E0okNcvS05MX8qwn0FJ8XL7znZM3M6zttapJCdi2hm4=",
+  "Hash": "d9xp6SUgcZrwAX5xvzL0r7bZsIhgYTAfLSEz6K83lt0=",
   "Source": "IMS",
   "BasePath": "_content/IMS",
   "Mode": "Default",
@@ -1256,6 +1256,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Identity": "C:\\Users\\Vadion\\Desktop\\AspDotNet\\IMS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-lumen.min.css",
+      "SourceId": "IMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Vadion\\Desktop\\AspDotNet\\IMS\\wwwroot\\",
+      "BasePath": "_content/IMS",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-lumen.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-lumen.min.css"
     },
     {
       "Identity": "C:\\Users\\Vadion\\Desktop\\AspDotNet\\IMS\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",

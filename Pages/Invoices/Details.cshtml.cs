@@ -31,9 +31,9 @@ namespace IMS.Pages.Invoices
             if (id == null)
                 return NotFound();
 
-            var invoice = await Context.Invoice.FirstOrDefaultAsync(m => m.InvoiceId == id);
+            Invoice = await Context.Invoice.FirstOrDefaultAsync(m => m.InvoiceId == id);
             
-            if (invoice == null)
+            if (Invoice == null)
                 return NotFound();
 
             var isInvoiceCreator = await AuthorizationService.AuthorizeAsync(User, Invoice, InvoiceOperations.Read);
@@ -45,6 +45,29 @@ namespace IMS.Pages.Invoices
                 return Forbid();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int id, InvoiceStatus status)
+        {
+            Invoice = await Context.Invoice.FindAsync(id);
+
+            if (Invoice == null)
+                return NotFound();
+
+            var invoiceOperation = status == InvoiceStatus.APPROVED ? InvoiceOperations.Approve
+                : InvoiceOperations.Reject;
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(User, Invoice, invoiceOperation);
+
+            if (!isAuthorized.Succeeded)
+                return Forbid();
+
+            Invoice.Status = status;
+            Context.Invoice.Update(Invoice);
+
+            await Context.SaveChangesAsync();
+
+            return RedirectToPage("./Index"); 
         }
     }
 }

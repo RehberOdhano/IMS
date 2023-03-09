@@ -16,6 +16,10 @@ namespace IMS.Data
                 // manager
                 var managerUID = await EnsureUser(serviceProvider, "manager@demo.com", password);
                 await EnsureRole(serviceProvider, managerUID, Constants.InvoiceManagerRole);
+
+                // admin
+                var adminUID = await EnsureUser(serviceProvider, "admin@demo.com", password);
+                await EnsureRole(serviceProvider, adminUID, Constants.InvoiceAdminRole);
             }
         }
 
@@ -24,7 +28,6 @@ namespace IMS.Data
             string userName, string initPw)
         {
             var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
-
             var user = await userManager.FindByNameAsync(userName);
 
             // if we don't have manager account, then we'll create one...

@@ -16,10 +16,10 @@ namespace IMS.Authorization
         public static readonly OperationAuthorizationRequirement Delete =
             new() { Name = Constants.DeleteOperationName };
         
-        public static readonly OperationAuthorizationRequirement Approved =
+        public static readonly OperationAuthorizationRequirement Approve =
             new() { Name = Constants.ApprovedOperationName };
         
-        public static readonly OperationAuthorizationRequirement Rejected =
+        public static readonly OperationAuthorizationRequirement Reject =
             new() { Name = Constants.RejectedOperationName };
     }
 
@@ -34,5 +34,6 @@ namespace IMS.Authorization
         public static readonly string RejectedOperationName = "REJECTED";
 
         public static readonly string InvoiceManagerRole = "INVOICE_MANAGER";
+        public static readonly string InvoiceAdminRole = "INVOICE_ADMIN";
     }
 }

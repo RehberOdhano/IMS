@@ -47,6 +47,7 @@ builder.Services.AddScoped<IAuthorizationHandler, InvoiceCreatorAuthorizationHan
 
 // singleton - only one instance of this class...
 builder.Services.AddSingleton<IAuthorizationHandler, InvoiceManagerAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, InvoiceAdminAuthorizationHandler>();
 
 
 var app = builder.Build();
