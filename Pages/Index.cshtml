@@ -1,5 +1,9 @@
 ﻿@page
+
+@using IMS.Authorization
+
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
 }
@@ -9,6 +13,81 @@
 </head>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome to IMS</h1>
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 </div>
+
+
+@*@if (User.IsInRole(Constants.InvoiceAdminRole))
+{
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+}*@
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        // labels
+        const months = [
+            'January',
+            'Feburary',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+
+        const data = {
+            labels: months,
+            datasets: [
+                {
+                    label: "Revenue Submitted",
+                    backgroundColor: "rgb(0,0,0)",
+                    borderColor: "rgb(0,0,0)",
+                    cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueSubmitted)
+                },
+                {
+                    label: "Revenue Approved",
+                    backgroundColor: "rgb(132,99,255)",
+                    borderColor: "rgb(132,99,255)",
+                    cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueApproved)
+                },
+                {
+                    label: "Revenue Rejected",
+                    backgroundColor: "rgb(255,99,132)",
+                    borderColor: "rgb(255,99,132)",
+                    cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueRejected)
+                }
+            ]
+        };
+
+        // we'll render the data using this configuration
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+
+        const myChart = new Chart(
+            document.getElementById("myChart"),
+            config
+        );
+
+    </script>
+
+}
